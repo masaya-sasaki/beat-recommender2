@@ -110,6 +110,7 @@ export default function Home({signInPath}) {
             {name=='' ? 
                 <>
                   <Image
+                  alt='spotifylogo'
                   width='30px'
                   height='30px'
                   src={'/spotifylogo.png'}
@@ -119,6 +120,7 @@ export default function Home({signInPath}) {
                :
                 <>
                   <Image
+                  alt='spotifylogo'
                   width='30px'
                   height='30px'
                   src={'/spotifylogo.png'}
@@ -140,6 +142,7 @@ export default function Home({signInPath}) {
             { 
             favoriteArtists.length ==0 ? <div>fetching...</div> :
             favoriteArtists.map((item)=><ArtistCard
+            key={item+'favoriteartist'}
             onClick={()=>{selectItem(item, 'artist')}}
             image={''}
             artist={item}
@@ -153,6 +156,7 @@ export default function Home({signInPath}) {
             { 
             selectedArtists.length ==0 ? <div>None selected</div> :
             selectedArtists.map((item)=><ArtistCard
+            key={item+'selectedartist'}
             onClick={()=>{removeItem(item, 'artist')}}
             image={''}
             artist={item}
@@ -167,6 +171,7 @@ export default function Home({signInPath}) {
             favoriteGenres.length==0 ? <div>fetching</div> :
             favoriteGenres.map((item)=>
             <GenreCard
+            key={item+'favoritegenre'}
             onClick={()=>{selectItem(item, 'genre')}}
             image={''}
             genre={item}
@@ -182,6 +187,7 @@ export default function Home({signInPath}) {
             selectedGenres.length==0 ? <div>None selected</div> :
             selectedGenres.map((item)=>
             <GenreCard
+            key={item+'favoritegenre'}
             onClick={()=>{removeItem(item, 'genre')}}
             image={''}
             genre={item}
@@ -201,6 +207,7 @@ export default function Home({signInPath}) {
             recommendation.map(
               (item)=>(
                 <TrackCard
+                  key={item+'recommendedtracks'}
                   image={item.image}
                   name={item.names}
                   artist={item.artist}

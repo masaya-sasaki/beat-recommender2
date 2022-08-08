@@ -9,6 +9,7 @@ export default function TrackCard({image, name, artist, href}){
                     width='70px'
                     height='70px'
                     src={image}
+                    alt={'albumcoverof'+name}
                     />
                     <div className="flex flex-col justify-center pl-2">
                         <div className="font-semibold text-black">{name}</div>
