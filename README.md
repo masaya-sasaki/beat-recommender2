@@ -1,34 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Beat Recommender 2 - song recommender web app using Spotify API 
 
-## Getting Started
+**Beat Recommender 2** is a song recommendation web application created using Next.js, React, Tailwind CSS, and Spotify API.
 
-First, run the development server:
+# Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+ 1. Introduction
+ 2. Technologies
+ 3. Setup
+ 4. Features
+ 5. Upcoming Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Introduction
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+**Beat Recommender 2** is a song recommendation web application created using Next.js, React, Tailwind CSS, and Spotify API. I wanted to update my beat-recommender project using Spotify API that I created with Create React App with the new technology I have learned so I worked on this project. 
+Referred to these awesome guides to learn about the use of Spotify API and Next.js. 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+https://qiita.com/Yuki_Oshima/items/82116e4044687b16ef60
+https://dev.to/j471n/how-to-use-spotify-api-with-nextjs-50o5
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Technologies
+This project is created with, 
+ - Next.js: "12.2.4"
+ - React: "18.2.0""
+ - React-DOM: "18.2.0",
+ - Tailwind CSS: "^3.1.8",
+ 
+## Setup
 
-## Learn More
+To try this project, go to 
+https://beat-recommender2.vercel.app/
 
-To learn more about Next.js, take a look at the following resources:
+## Features
+Following are the things that I have worked on and learned through working on this project. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Authentication using Authorization Code Flow and use of serverless api functions to handle keys to access third-party api's
+Learned how the Authorization Code Flow works and how it requires a server for this structure (you don't want to expose your keys in the frontend) because of the use of symmetric keys such as client id and client secret keys. Also, learned how to do this using serverless api functions in Next.js. I learned how to use Next.js serverless api's to use keys (environmental variables saved on the server) to access third-party api's.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Learned about session storage and use of different storage
+Also, learned how to use sessions to save information that you don't want to show on the frontend (like access tokens on the server). 
+These are some storage knowledge that I learned working on this project.
+Client (non-private) - cookies (easy, quick, small, lasting until clear cookies), localstorage(easy, quick, large, lasting until clear cache) 
+Server (private) - session (based on sessions, lasting until tab closed), files (small, until the server is unaccessible), database (large, until the server is unaccessible)
 
-## Deploy on Vercel
+### Tailwind css
+First time I used Tailwind css in my project. It took a while to get use to it but learned how it helps prototyping quickly. 
+So cool that you can just write css as classes! 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deployment to Vercel 
+I used Vercel to deploy and host this Next.js app. 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Upcoming Features
+ - Custom Hooks
+    Write custom hooks to call the serverless api functions to fetch information from third-parties with updates using useSWR. 
+    
+ - Global State Management
+    Use of Context API or Redux to manage global state such as user information. 
+    
+ - Re-collecting the access token using refresh tokens
+    Write the logic to use refresh tokens when the access token expires. 
+    
+ - Improve user experience
+    Make sure that errors can be shown when there is a problem using try catch and showing those errors in error messages.
+    Add validation to the selected favorite artists and genres (e.g. show error when there is more than 5 selected). 
+    
