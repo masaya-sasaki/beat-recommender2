@@ -147,10 +147,10 @@ export default function Home({signInPath}) {
             <li className='bg-gradient-to-r from-green-400 to-blue-500 rounded-lg py-1 px-2 cursor-pointer hover:scale-105' onClick={getTopTracks}>3. Get favorite tracks</li>
           </ul>
         </section>
-        <div className='w-5/6 grid grid-rows-5 grid-cols-4 gap-2 bg-slate-500 mt-5 rounded-md px-3 py-2 '>
-          <div className='text-xl row-span-1 col-span-3'>Select from your favorite artists and genres</div>
-          <div className='text-black row-span-1 col-span-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg py-1 px-2'>4. Select up to 5 total</div>
-          <section className='row-span-2 col-span-3'>
+        <div className='w-5/6 grid grid-cols-4 gap-2 bg-slate-500 mt-5 rounded-md px-3 py-2 '>
+          <div className='text-xl col-span-3'>Select from your favorite artists and genres</div>
+          <div className='text-black col-span-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg py-1 px-2'>4. Select up to 5 total</div>
+          <section className='col-span-3'>
             <h2 className=''>Favorite Artists</h2>
             <ul className=''>
               { 
@@ -164,7 +164,7 @@ export default function Home({signInPath}) {
               }
             </ul>
           </section>
-          <section className='row-span-2 col-span-1'>
+          <section className='col-span-1'>
             <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-md px-1 text-center'>Selected Favorite Artists</h2>
             <ul className=''>
               { 
@@ -178,7 +178,7 @@ export default function Home({signInPath}) {
               }
             </ul>
           </section>
-          <section className='row-span-2 col-span-3' >
+          <section className='col-span-3' >
             <h2>Favorite Genres</h2>
             <ul className='grid grid-cols-2'>
             {
@@ -194,7 +194,7 @@ export default function Home({signInPath}) {
             }
             </ul>
           </section>
-          <section className='row-span-2 col-span-1' >
+          <section className='col-span-1' >
             <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-md px-1 text-center'>Selected Favorite Genres</h2>
             <ul className='grid grid-cols-2'>
             {
