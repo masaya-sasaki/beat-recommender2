@@ -1,4 +1,4 @@
-# Beat Recommender 2 - song recommender web app using Spotify API 
+# Beat Recommender 2 - song recommender web app using Spotify API (total: 4days *3 hours=12 hours)
 
 **Beat Recommender 2** is a song recommendation web application created using Next.js, React, Tailwind CSS, and Spotify API.
 
@@ -13,7 +13,7 @@
 ## Introduction
 
 **Beat Recommender 2** is a song recommendation web application created using Next.js, React, Tailwind CSS, and Spotify API. I wanted to update my beat-recommender project using Spotify API that I created with Create React App with the new technology I have learned so I worked on this project. 
-Referred to these awesome guides to learn about the use of Spotify API and Next.js. 
+Referred to these awesome guides to learn about the use of Spotify API and Next.js. It took 12 hours to develop from ideation to deployment.
 
 https://qiita.com/Yuki_Oshima/items/82116e4044687b16ef60
 https://dev.to/j471n/how-to-use-spotify-api-with-nextjs-50o5
