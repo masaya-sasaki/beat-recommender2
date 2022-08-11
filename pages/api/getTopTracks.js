@@ -29,11 +29,12 @@ const getTopTracks = async(req, res) => {
     // create an array of genres
     const favoriteGenres = [];
     response.data.items.forEach((item)=>favoriteGenres.push(...item.genres))
-    
+
     res.status(200)
     res.json({
         favoriteArtistsWithIds,
         favoriteGenres: favoriteGenres.slice(0,10),
+        accessToken: accessToken
     })
 }
 

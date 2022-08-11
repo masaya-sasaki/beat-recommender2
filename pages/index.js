@@ -1,19 +1,85 @@
 import axios from 'axios';
 import Head from 'next/head'
 import Image from 'next/image';
-import {useState} from 'react'; 
+import {useState, useEffect} from 'react'; 
 import ArtistCard from '../components/ArtistCard';
 import GenreCard from '../components/GenreCard';
 import TrackCard from '../components/TrackCard';
+import { useWebPlayback } from '../hooks/useWebPlayback';
 
 export default function Home({signInPath}) {
   const [name, setName] = useState('')
+  const [accessToken, setAccessToken] = useState('')
   const [favoriteArtists, setFavoriteArtists] = useState([])
   const [favoriteGenres, setFavoriteGenres] = useState([])
   const [selectedArtists, setSelectedArtists] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
   const [artistsWithIds, setArtistsWithIds] = useState({})
   const [recommendation, setRecommendation] = useState([])
+  const {deviceId, player, isReady, is_paused} = useWebPlayback({
+    getOAuthToken: () => Promise.resolve(sessionStorage.getItem("accessToken"))
+  })
+
+  useEffect(()=>{
+    if(isReady){
+      console.log('try connecting to spotify connect')
+      player.connect()
+    }
+  }, [isReady])
+
+  const addQueue = ({
+    spotify_uri,
+    playerInstance: {
+      _options: {
+        getOAuthToken,
+      }
+    }
+  }) => {
+    getOAuthToken(access_token => {
+      
+      fetch(`https://api.spotify.com/v1/me/player/queue?uri=${spotify_uri}&device_id=${deviceId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`
+        },
+      }).catch(error => console.log('post failed', error))
+    });
+  };
+
+  const handleQueue = (uri) => {addQueue({
+    playerInstance: player,
+    spotify_uri: uri,
+  })}
+
+  const play = ({
+    spotify_uri,
+    playerInstance: {
+      _options: {
+        getOAuthToken,
+      }
+    }
+  }) => {
+    getOAuthToken(access_token => {
+      fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ uris: [spotify_uri] }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`
+        },
+      });
+    });
+  };
+
+  const handleClick = (uri) => {play({
+    playerInstance: player,
+    spotify_uri: uri,
+  })}
+
+  const handlePause = () => {
+    player.togglePlay() 
+  }
 
   const signIn = () => {
     // redirect the user to the spotify authentication 
@@ -51,6 +117,10 @@ export default function Home({signInPath}) {
     // update every time
     setFavoriteArtists([...favoriteArtist])
     setFavoriteGenres([...data.favoriteGenres])
+    console.log('setting accesstoken', data.accessToken)
+    setAccessToken(data.accessToken)
+    sessionStorage.setItem('accessToken', data.accessToken)
+    console.log('get access token from session storage', sessionStorage.getItem('accessToken') )
   }
 
   const selectItem = (item, category) => {
@@ -97,6 +167,8 @@ export default function Home({signInPath}) {
     setRecommendation([...data.tracks])
   }
 
+  
+
   return (
     <div className='font-sans bg-[#191414] text-white flex flex-col items-center box-border'>
       <Head>
@@ -139,6 +211,16 @@ export default function Home({signInPath}) {
         </div>
       </header>
       <main className='w-full flex flex-col items-center mt-5'>
+      <button className="btn-spotify" onClick={()=>{
+                    play({
+                        playerInstance: player,
+                        spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+                      })
+                }} >
+                    play 
+                    {/* { is_paused ? "PLAY" : "PAUSE" } */}
+                </button>
+        {/* <WebPlayback accessToken={accessToken}/> */}
         <section className='w-5/6 px-3 py-2 rounded-md bg-slate-500'>
           <h2 className='text-xl mb-2'>How to use in 5 steps</h2>
           <ul className='gap-3 text-black flex flex-col'>
@@ -147,9 +229,12 @@ export default function Home({signInPath}) {
             <li className='bg-gradient-to-r from-green-400 to-blue-500 rounded-lg py-1 px-2 cursor-pointer hover:scale-105' onClick={getTopTracks}>3. Get favorite tracks</li>
           </ul>
         </section>
-        <div className='w-5/6 grid grid-rows-5 grid-cols-4 gap-2 bg-slate-500 mt-5 rounded-md px-3 py-2 '>
-          <div className='text-xl row-span-1 col-span-3'>Select from your favorite artists and genres</div>
-          <div className='text-black row-span-1 col-span-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg py-1 px-2'>4. Select up to 5 total</div>
+        <div className='w-5/6 bg-slate-500 mt-5 rounded-md px-3 py-2 '>
+          <div className='grid grid-rows-1 grid-cols-4'>
+            <div className='text-xl row-span-1 col-span-3'>Select from your favorite artists and genres</div>
+            <div className='text-black row-span-1 col-span-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg py-1 px-2'>4. Select up to 5 total</div>
+          </div>
+          <div className='grid grid-rows-4 grid-cols-4 gap-2 mt-1'>
           <section className='row-span-2 col-span-3'>
             <h2 className=''>Favorite Artists</h2>
             <ul className=''>
@@ -210,6 +295,7 @@ export default function Home({signInPath}) {
             }
             </ul>
           </section>
+          </div>
         </div>
         <div className='flex justify-center mt-5 mb-10 w-5/6 text-black'>
             <button onClick={getRecommendation} className='bg-gradient-to-r from-green-400 to-blue-500 w-5/6 rounded-lg py-1 px-2 hover:scale-105 cursor-pointer' >5. Get recommendation</button>
@@ -229,6 +315,11 @@ export default function Home({signInPath}) {
                   name={item.names}
                   artist={item.artist}
                   href={item.href}
+                  uri={item.uri}
+                  handleClick={handleClick}
+                  handlePause={handlePause}
+                  handleQueue={handleQueue}
+                  isPaused={is_paused}
                   />
               )
             )
@@ -256,7 +347,7 @@ export default function Home({signInPath}) {
 
 export async function getStaticProps(ctx){
   const parameters = new URLSearchParams()
-  const scopes = [ 'user-read-email', 'user-read-private', 'user-top-read']
+  const scopes = [ 'streaming', 'user-read-email', 'user-read-private', 'user-top-read']
   parameters.append('client_id', process.env.REACT_APP_CLIENT_ID)
   parameters.append('response_type', 'code')
   parameters.append('redirect_uri', process.env.REACT_APP_REDIRECT_URI)

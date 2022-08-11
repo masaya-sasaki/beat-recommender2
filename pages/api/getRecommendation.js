@@ -27,7 +27,7 @@ const handler = async (req, res) => {
     )
 
     // create an array of json objects track that contain data of 
-    // names, artist, image, and link 
+    // names, artist, image, link, and uri 
     const recommendedTracks = response.data.tracks.map(
         (item) => {
             return {
@@ -35,6 +35,7 @@ const handler = async (req, res) => {
                 artist: item.artists[0].name,
                 image: item.album.images[2].url,
                 href: item.external_urls.spotify,
+                uri: item.uri
             }
         }
     )
