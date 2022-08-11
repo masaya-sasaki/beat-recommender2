@@ -24,16 +24,20 @@ export default function SelectFavorites({favoriteArtists, favoriteGenres, select
             </ul>
           </section>
           <section className='row-span-1 col-span-1'>
-            <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-md px-1 text-center'>Selected Favorite Artists</h2>
+            <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-t-md px-1 text-center'>Selected Favorite Artists</h2>
             <ul className=''>
               { 
               selectedArtists.length ==0 ? <div>None selected</div> :
-              selectedArtists.map((item)=><ArtistCard
-              key={item+'selectedartist'}
-              onClick={()=>{removeItem(item, 'artist')}}
-              image={''}
-              artist={item}
-            />)
+              selectedArtists.map((item)=>
+              <div className="p-1 bg-gradient-to-r from-green-400 to-blue-500">
+                  <ArtistCard
+                    key={item+'selectedartist'}
+                    onClick={()=>{removeItem(item, 'artist')}}
+                    image={''}
+                    artist={item}
+                    />
+              </div>
+              )
               }
             </ul>
           </section>
@@ -54,17 +58,19 @@ export default function SelectFavorites({favoriteArtists, favoriteGenres, select
             </ul>
           </section>
           <section className='col-span-1' >
-            <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-md px-1 text-center'>Selected Favorite Genres</h2>
+            <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-t-md px-1 text-center'>Selected Favorite Genres</h2>
             <ul className='grid grid-cols-2'>
             {
               selectedGenres.length==0 ? <div>None selected</div> :
               selectedGenres.map((item)=>
-              <GenreCard
-              key={item+'favoritegenre'}
-              onClick={()=>{removeItem(item, 'genre')}}
-              image={''}
-              genre={item}
-              />
+              <div className="p-1 bg-gradient-to-r from-green-400 to-blue-500">
+                  <GenreCard
+                    key={item+'favoritegenre'}
+                    onClick={()=>{removeItem(item, 'genre')}}
+                    image={''}
+                    genre={item}
+                    />
+              </div>
               )
             }
             </ul>
