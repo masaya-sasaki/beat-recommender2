@@ -15,7 +15,7 @@
 **Beat Recommender 2** is a song recommendation web application created using Next.js, React, Tailwind CSS, and Spotify API. I wanted to update my beat-recommender project using Spotify API that I created with Create React App with the new technology I have learned so I worked on this project. 
 Referred to these awesome guides to learn about the use of Spotify API and Next.js. Target Users: spotify user's who enjoy finding music that they like based on recommendation. e.g. user's who enjoy the Discover weekly playlists on Spotify. 
 
-It took 12 hours to develop from ideation to deployment.
+It took 12 hours to develop from ideation to deployment for the first main features (authenticate user with Spotify, get top artists and genre from the user, and allow user to select up to 5 of those traits and submit those to spotify recommendation API and show results.)
 1 hour to brainstorm and come up with the idea of a web application using Spotify API.
 8 hours to development including research on Next.js, Spotify API integration, Tailwind CSS. 
 1 hour to deployment, hosting, and continuous integration.
@@ -54,6 +54,12 @@ So cool that you can just write css as classes!
 
 ### Deployment to Vercel 
 I used Vercel to deploy and host this Next.js app. 
+
+### Writing Custom Hooks
+In order to use the Spotify Web Playback SDK and allow access to the player instance across the app, created my first custom hook which receives a callback function to get access token and then adds the spotify web player sdk script and initialize a player instance using the access token and returns information and updates about the state of the connected player instance through a combination of useState, useEffect, and useRef. The hook returns the player instance, information about whether the instance is ready to connect, and device id which is needed to use the web player api. 
+
+### AJAX
+Uses fetch API and axios to make API requests to the Spotify API and Next.js APIs. 
 
 ## Upcoming Features (Updates!)
  - Custom Hooks
