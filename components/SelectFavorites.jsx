@@ -29,9 +29,10 @@ export default function SelectFavorites({favoriteArtists, favoriteGenres, select
               { 
               selectedArtists.length ==0 ? <div>None selected</div> :
               selectedArtists.map((item)=>
-              <div className="p-1 bg-gradient-to-r from-green-400 to-blue-500">
+              <div className="p-1 bg-gradient-to-r from-green-400 to-blue-500"
+              key={item+'selectedartist'}
+              >
                   <ArtistCard
-                    key={item+'selectedartist'}
                     onClick={()=>{removeItem(item, 'artist')}}
                     image={''}
                     artist={item}
@@ -63,7 +64,9 @@ export default function SelectFavorites({favoriteArtists, favoriteGenres, select
             {
               selectedGenres.length==0 ? <div>None selected</div> :
               selectedGenres.map((item)=>
-              <div className="p-1 bg-gradient-to-r from-green-400 to-blue-500">
+              <div className="p-1 bg-gradient-to-r from-green-400 to-blue-500"
+              key={item+'favoritegenre'}
+              >
                   <GenreCard
                     key={item+'favoritegenre'}
                     onClick={()=>{removeItem(item, 'genre')}}
