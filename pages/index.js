@@ -249,7 +249,7 @@ export default function Home({signInPath}) {
               }
             </ul>
           </section>
-          <section className='row-span-2 col-span-1'>
+          <section className='col-span-1'>
             <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-md px-1 text-center'>Selected Favorite Artists</h2>
             <ul className=''>
               { 
@@ -263,7 +263,7 @@ export default function Home({signInPath}) {
               }
             </ul>
           </section>
-          <section className='row-span-2 col-span-3' >
+          <section className='col-span-3' >
             <h2>Favorite Genres</h2>
             <ul className='grid grid-cols-2'>
             {
@@ -279,7 +279,7 @@ export default function Home({signInPath}) {
             }
             </ul>
           </section>
-          <section className='row-span-2 col-span-1' >
+          <section className='col-span-1' >
             <h2 className=' bg-gradient-to-r from-green-400 to-blue-500 rounded-md px-1 text-center'>Selected Favorite Genres</h2>
             <ul className='grid grid-cols-2'>
             {
