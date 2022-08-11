@@ -55,7 +55,7 @@ So cool that you can just write css as classes!
 ### Deployment to Vercel 
 I used Vercel to deploy and host this Next.js app. 
 
-## Upcoming Features
+## Upcoming Features (Updates!)
  - Custom Hooks
     Write custom hooks to call the serverless api functions to fetch information from third-parties with updates using useSWR. 
     
@@ -69,9 +69,10 @@ I used Vercel to deploy and host this Next.js app.
     Make sure that errors can be shown when there is a problem using try catch and showing those errors in error messages.
     Add validation to the selected favorite artists and genres (e.g. show error when there is more than 5 selected). 
  
- - Feature to try and play the song without leaving the web app.
+ ## New Features
+ - Feature to try and play the song without leaving the web app. 
    Integration of Spotify Web Playback SDK. 
- 
+
  - You can add the songs to the playlist from the web app.
 
     
