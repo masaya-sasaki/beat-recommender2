@@ -58,6 +58,9 @@ I used Vercel to deploy and host this Next.js app.
 ### Writing Custom Hooks
 In order to use the Spotify Web Playback SDK and allow access to the player instance across the app, created my first custom hook which receives a callback function to get access token and then adds the spotify web player sdk script and initialize a player instance using the access token and returns information and updates about the state of the connected player instance through a combination of useState, useEffect, and useRef. The hook returns the player instance, information about whether the instance is ready to connect, and device id which is needed to use the web player api. 
 
+Referred to this awesome repo for learning about how to write a custom hook for Spotify Web Player. 
+https://github.com/niekert/use-spotify-web-playback-sdk
+
 ### AJAX
 Uses fetch API and axios to make API requests to the Spotify API and Next.js APIs. 
 
