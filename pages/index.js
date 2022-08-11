@@ -243,16 +243,6 @@ export default function Home({signInPath}) {
         </div>
       </header>
       <main className='w-full flex flex-col items-center mt-5'>
-      <button className="btn-spotify" onClick={()=>{
-                    play({
-                        playerInstance: player,
-                        spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
-                      })
-                }} >
-                    play 
-                    {/* { is_paused ? "PLAY" : "PAUSE" } */}
-                </button>
-        {/* <WebPlayback accessToken={accessToken}/> */}
         <section className='w-5/6 px-3 py-2 rounded-md bg-slate-500'>
           <h2 className='text-xl mb-2'>How to use in 5 steps</h2>
           <ul className='gap-3 text-black flex flex-col'>
