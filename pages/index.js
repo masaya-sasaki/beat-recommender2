@@ -125,10 +125,14 @@ export default function Home({signInPath}) {
 
   const selectItem = (item, category) => {
     if(category==='artist'){
-      setSelectedArtists([...selectedArtists, item])
+      if(!selectedArtists.includes(item)){
+        setSelectedArtists([...selectedArtists, item])
+      }
     }
     else if(category==='genre'){
-      setSelectedGenres([...selectedGenres, item])
+      if(!selectedGenres.includes(item)){
+        setSelectedGenres([...selectedGenres, item])
+      }
     }
   }
 
