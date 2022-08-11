@@ -27,6 +27,34 @@ export default function Home({signInPath}) {
     }
   }, [isReady])
 
+  const addToSaveTracks = ({
+    spotify_uri,
+    playerInstance: {
+      _options: {
+        getOAuthToken,
+      }
+    }
+  }) => {
+    getOAuthToken(access_token => {
+      fetch(`https://api.spotify.com/v1/me/tracks?ids=${spotify_uri}`, {
+        method: 'PUT',
+        body: JSON.stringify({ ids: [spotify_uri] }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`
+        },
+      }).then(res => console.log('this is the result', res)).catch(error=>console.log('this is the error', error))
+    });
+  };
+
+  const handleSave = (uri) => {
+    const trimmedUri = uri.substring(uri.indexOf(':')+6).slice(1)
+    addToSaveTracks({
+      playerInstance: player,
+      spotify_uri: trimmedUri,
+    })
+  }
+
   const addQueue = ({
     spotify_uri,
     playerInstance: {
@@ -324,6 +352,7 @@ export default function Home({signInPath}) {
                   handlePause={handlePause}
                   handleQueue={handleQueue}
                   isPaused={is_paused}
+                  handleSave={handleSave}
                   />
               )
             )
@@ -351,7 +380,7 @@ export default function Home({signInPath}) {
 
 export async function getStaticProps(ctx){
   const parameters = new URLSearchParams()
-  const scopes = [ 'streaming', 'user-read-email', 'user-read-private', 'user-top-read']
+  const scopes = [ 'streaming', 'user-read-email', 'user-read-private', 'user-top-read', 'user-library-modify']
   parameters.append('client_id', process.env.REACT_APP_CLIENT_ID)
   parameters.append('response_type', 'code')
   parameters.append('redirect_uri', process.env.REACT_APP_REDIRECT_URI)

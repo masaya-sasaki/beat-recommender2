@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export default function TrackCard({image, name, artist, href, uri, handleClick, handlePause, handleQueue, isPaused}){
+export default function TrackCard({image, name, artist, href, uri, handleClick, handlePause, handleQueue, isPaused, handleSave}){
     return (
         <li className="bg-white rounded-md py-2 px-1 hover:scale-105 cursor-pointer flex justify-between">
                 <div className="flex justify-start">
@@ -21,6 +21,7 @@ export default function TrackCard({image, name, artist, href, uri, handleClick, 
                     <span onClick={()=>{handleClick(uri)}}>play</span>
                     <span onClick={handlePause}>{isPaused ? 'resume' : 'pause'}</span>
                     <span onClick={()=>{handleQueue(uri)}}>add to queue</span>
+                    <span onClick={()=>{handleSave(uri)}}>add to your saved library</span>
                 </div>
         </li>
     )
